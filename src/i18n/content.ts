@@ -14,6 +14,13 @@ export interface BuyLink {
   featured?: boolean;
 }
 
+export interface MitateGalleryItem {
+  src: string;
+  alt: string;
+  pair?: { src: string; alt: string };
+  caption?: string;
+}
+
 export interface SiteContent {
   meta: {
     title: string;
@@ -72,10 +79,24 @@ export interface SiteContent {
      */
     images: Array<{ src: string; alt: string }>;
   };
+  mitateGallery: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    /**
+     * Up to 6 artwork detail images.
+     * Each item can optionally have a `pair` image — shown on hover (mitate reveal).
+     * Drop 800×1067px JPGs into public/images/details/ and set src paths.
+     * Leave items: [] to render placeholder slots.
+     */
+    items: MitateGalleryItem[];
+  };
   artist: {
     eyebrow: string;
     name: string;
     bio: string[];
+    clients: string;     // one-line comma-separated string
+    awards: Array<{ year: string; award: string; result: string }>;
     cta: string;
     portraitAlt: string;
     portraitPlaceholder: string;
@@ -144,12 +165,12 @@ const en: SiteContent = {
       {
         term: '掛物',
         label: 'Kakemono',
-        body: 'Wood crossbar hardware holds the volumes open at any page, transforming the book into a hanging scroll display object.',
+        body: 'A kakemono is a traditional Japanese hanging scroll — artwork mounted on a rod, suspended from the wall, changed with the season. Love inherits this logic: the wooden crossbar hardware clips across both open volumes, suspending them side by side as a wall display. Any page, any combination. A different image every day — the book becomes a living exhibition.',
       },
       {
         term: '覗き',
         label: 'Nozoki',
-        body: 'The act of looking. Sliding the shōji case open to reveal the two volumes is itself a choreographed gesture of discovery.',
+        body: 'The shōji case is not packaging — it is a threshold. Sliding it open is a deliberate, intimate act: a pause before looking, a frame around the moment of discovery. The term nozoki (覗き, peeking) transforms what could be a simple unboxing into a choreographed ritual, separating the ordinary from what lies inside.',
       },
     ],
   },
@@ -171,12 +192,36 @@ const en: SiteContent = {
       // { src: '/images/spreads/right-03.jpg', alt: 'Volume II — spread 3' },
     ],
   },
+  mitateGallery: {
+    eyebrow: 'The Illustrations',
+    title: 'Each image — two readings',
+    intro: 'Every spread works as a complete composition on its own. Hover to see its mitate pair — the same subject seen through another volume, another context, another moment.',
+    items: [
+      // Drop 800×1067px JPGs into public/images/details/ and uncomment:
+      // { src: '/images/details/detail-01.jpg', alt: 'Detail 1 — Volume I', pair: { src: '/images/details/detail-01b.jpg', alt: 'Detail 1 — Volume II' }, caption: 'Spring' },
+      // { src: '/images/details/detail-02.jpg', alt: 'Detail 2 — Volume I', pair: { src: '/images/details/detail-02b.jpg', alt: 'Detail 2 — Volume II' }, caption: 'Summer' },
+      // { src: '/images/details/detail-03.jpg', alt: 'Detail 3 — Volume I', pair: { src: '/images/details/detail-03b.jpg', alt: 'Detail 3 — Volume II' }, caption: 'Autumn' },
+      // { src: '/images/details/detail-04.jpg', alt: 'Detail 4 — Volume I', pair: { src: '/images/details/detail-04b.jpg', alt: 'Detail 4 — Volume II' }, caption: 'Winter' },
+      // { src: '/images/details/detail-05.jpg', alt: 'Detail 5 — Volume I', pair: { src: '/images/details/detail-05b.jpg', alt: 'Detail 5 — Volume II' } },
+      // { src: '/images/details/detail-06.jpg', alt: 'Detail 6 — Volume I', pair: { src: '/images/details/detail-06b.jpg', alt: 'Detail 6 — Volume II' } },
+    ],
+  },
   artist: {
     eyebrow: 'The Artist',
     name: 'Sveta Dorosheva',
     bio: [
-      'Sveta Dorosheva is a Ukrainian-Israeli illustrator whose intricate, hand-drawn work draws on Eastern European folk traditions, medieval manuscript art, and a lifelong fascination with the boundary between the seen and unseen world.',
-      'Her illustrations have been described as reminiscent of Aubrey Beardsley — dense with ornament, alive with narrative, impossible to take in all at once. Love is her first artist\'s book conceived entirely as a fine art collectible. She lives and works in Israel.',
+      'Originally from Ukraine and now based in Israel, Sveta Dorosheva is an illustrator whose work lives at the boundary of myth, fairy tale, and the quietly extraordinary. Over fifteen years of practice she has built a language rooted in Eastern European folk tradition and medieval manuscript art — dense with ornament, alive with story, impossible to take in all at once.',
+      'Her projects cross disciplines: books, film, museums, editorial, brand. She has worked with Disney/Hyperion, HarperCollins, Penguin Random House, Macmillan, Ravensburger, Capitol Records, the British Library, the Los Angeles Times, and the New York Museum of Jewish Heritage, among others.',
+      'Love is her first artist\'s book conceived entirely as a collectible art object — a project in which the binding, the case, and the mechanic are as much her work as the illustrations inside.',
+    ],
+    clients: 'Disney · HarperCollins · Penguin Random House · Macmillan · Ravensburger · Capitol Records · British Library · Los Angeles Times',
+    awards: [
+      { year: '2024', award: 'World Illustration Awards',              result: 'Winner — Professional Category' },
+      { year: '2024', award: 'Hiii Illustration International',        result: 'Best of the Best' },
+      { year: '2024', award: 'American Illustration 43',               result: 'Chosen Winner' },
+      { year: '2024', award: 'Communication Arts',                     result: 'Award of Excellence' },
+      { year: '2024', award: 'iJungle Illustration Awards',            result: 'Silver Medal' },
+      { year: '2024', award: 'Victoria & Albert Museum Illustration',  result: 'Shortlist' },
     ],
     cta: 'Full Portfolio →',
     portraitAlt: 'Sveta Dorosheva, illustrator',
@@ -269,12 +314,12 @@ const ru: SiteContent = {
       {
         term: '掛物',
         label: 'Какэмоно',
-        body: 'Деревянная перекладина удерживает тома раскрытыми на любой странице, превращая книгу в подвесной настенный свиток.',
+        body: 'Какэмоно — традиционный японский подвесной свиток: произведение искусства на перекладине, вывешиваемое на стену и меняемое со сменой сезона. Love наследует эту логику: деревянная перекладина крепится через оба раскрытых тома и удерживает их рядом как настенный объект. Любая страница, любая комбинация. Новое изображение каждый день — книга становится живой выставкой.',
       },
       {
         term: '覗き',
         label: 'Нодзоки',
-        body: 'Взгляд. Скольжение крышки сёдзи открывает оба тома — это само по себе хореографический жест открытия.',
+        body: 'Футляр сёдзи — не упаковка, а порог. Сдвинуть его — намеренный, интимный жест: пауза перед взглядом, рамка вокруг момента открытия. Слово нодзоки (覗き, подглядывание) превращает то, что могло быть простым распаковыванием, в хореографический ритуал — черту между обыденным и тем, что скрыто внутри.',
       },
     ],
   },
@@ -295,12 +340,35 @@ const ru: SiteContent = {
       // { src: '/images/spreads/right-03.jpg', alt: 'Том II — разворот 3' },
     ],
   },
+  mitateGallery: {
+    eyebrow: 'Иллюстрации',
+    title: 'Каждый образ — два прочтения',
+    intro: 'Каждый разворот работает как самостоятельная композиция. Наведите курсор, чтобы увидеть митатэ-пару — тот же образ, другой том, другой контекст, другой момент.',
+    items: [
+      // { src: '/images/details/detail-01.jpg', alt: 'Деталь 1 — Том I', pair: { src: '/images/details/detail-01b.jpg', alt: 'Деталь 1 — Том II' }, caption: 'Весна' },
+      // { src: '/images/details/detail-02.jpg', alt: 'Деталь 2 — Том I', pair: { src: '/images/details/detail-02b.jpg', alt: 'Деталь 2 — Том II' }, caption: 'Лето' },
+      // { src: '/images/details/detail-03.jpg', alt: 'Деталь 3 — Том I', pair: { src: '/images/details/detail-03b.jpg', alt: 'Деталь 3 — Том II' }, caption: 'Осень' },
+      // { src: '/images/details/detail-04.jpg', alt: 'Деталь 4 — Том I', pair: { src: '/images/details/detail-04b.jpg', alt: 'Деталь 4 — Том II' }, caption: 'Зима' },
+      // { src: '/images/details/detail-05.jpg', alt: 'Деталь 5 — Том I', pair: { src: '/images/details/detail-05b.jpg', alt: 'Деталь 5 — Том II' } },
+      // { src: '/images/details/detail-06.jpg', alt: 'Деталь 6 — Том I', pair: { src: '/images/details/detail-06b.jpg', alt: 'Деталь 6 — Том II' } },
+    ],
+  },
   artist: {
     eyebrow: 'Художник',
     name: 'Света Дорошева',
     bio: [
-      'Света Дорошева — украинско-израильская художница-иллюстратор. Её работы опираются на традиции восточноевропейского фольклора, средневековую книжную иллюминацию и интерес к границе видимого и невидимого.',
-      'Её иллюстрации сравнивают с Обри Бёрдслеем — насыщенный орнамент, живое повествование, невозможность охватить всё с первого взгляда. Love — её первая книга художника, задуманная целиком как коллекционный арт-объект. Живёт и работает в Израиле.',
+      'Родом из Украины, сейчас живёт и работает в Израиле. Света Дорошева — иллюстратор, чьи работы существуют на границе мифа, сказки и тихо-необыкновенного. За пятнадцать лет практики она выстроила язык, уходящий корнями в традиции восточноевропейского фольклора и средневековую книжную иллюминацию — насыщенный орнаментом, живой нарративом, необъятный с первого взгляда.',
+      'Её проекты пересекают дисциплины: книги, кино, музеи, editorial, бренды. Среди клиентов — Disney/Hyperion, HarperCollins, Penguin Random House, Macmillan, Ravensburger, Capitol Records, Британская библиотека, Los Angeles Times, Музей еврейского наследия в Нью-Йорке.',
+      'Love — её первая книга художника, задуманная целиком как коллекционный арт-объект: переплёт, футляр и механика — такая же её работа, как и иллюстрации внутри.',
+    ],
+    clients: 'Disney · HarperCollins · Penguin Random House · Macmillan · Ravensburger · Capitol Records · Британская библиотека · Los Angeles Times',
+    awards: [
+      { year: '2024', award: 'World Illustration Awards',              result: 'Победитель — Профессиональная категория' },
+      { year: '2024', award: 'Hiii Illustration International',        result: 'Best of the Best' },
+      { year: '2024', award: 'American Illustration 43',               result: 'Chosen Winner' },
+      { year: '2024', award: 'Communication Arts',                     result: 'Award of Excellence' },
+      { year: '2024', award: 'iJungle Illustration Awards',            result: 'Серебряная медаль' },
+      { year: '2024', award: 'Victoria & Albert Museum Illustration',  result: 'Shortlist' },
     ],
     cta: 'Полное портфолио →',
     portraitAlt: 'Света Дорошева, художник-иллюстратор',
