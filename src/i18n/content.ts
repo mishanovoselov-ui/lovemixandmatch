@@ -234,7 +234,7 @@ const en: SiteContent = {
     links: [
       {
         name: 'Buy on svetadorosheva.com',
-        url: 'https://svetadorosheva.com',
+        url: 'https://www.svetadorosheva.com',
         note: 'Secure checkout · worldwide shipping',
         badge: 'Official Store',
         featured: true,
@@ -251,7 +251,7 @@ const en: SiteContent = {
       },
       {
         name: 'More by Sveta Dorosheva',
-        url: 'https://svetadorosheva.com',
+        url: 'https://www.svetadorosheva.com',
         note: 'Prints, originals & other books',
       },
     ],
@@ -381,7 +381,7 @@ const ru: SiteContent = {
     links: [
       {
         name: 'Купить на svetadorosheva.com',
-        url: 'https://svetadorosheva.com',
+        url: 'https://www.svetadorosheva.com',
         note: 'Безопасная оплата · доставка по всему миру',
         badge: 'Официальный магазин',
         featured: true,
@@ -398,7 +398,7 @@ const ru: SiteContent = {
       },
       {
         name: 'Другие книги и принты',
-        url: 'https://svetadorosheva.com',
+        url: 'https://www.svetadorosheva.com',
         note: 'Принты, оригиналы и другие книги',
       },
     ],
