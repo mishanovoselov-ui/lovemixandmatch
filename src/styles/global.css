@@ -1,24 +1,34 @@
-/* Love — Mix & Match Ehon — Global Styles */
+/* Love — Mix & Match Ehon — Japanese Style
+   This file is kept in sync with public/styles/global.css.
+   The live stylesheet is loaded from public/styles/global.css via Layout.astro. */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap');
 
 :root {
-  /* Dark luxury palette */
-  --obsidian:    #0C0A07;
-  --ink:         #080604;
-  --charcoal:    #141210;
-  --ash:         #221F1A;
+  /* Japanese palette */
+  --washi:       #FAF8F4;
+  --washi-2:     #F2EFE9;
+  --washi-3:     #E8E4DC;
 
-  /* Text */
-  --ivory:       #F0E8D4;
-  --ivory-dim:   #8A8278;
-  --ivory-ghost: #4A4640;
+  --ink:         #0D0D0D;
+  --ink-mid:     #555555;
+  --ink-light:   #999999;
 
-  /* Gold */
-  --gold:        #C49A3C;
-  --gold-light:  #DEB862;
+  --aka:         #C8102E;
+  --aka-dark:    #A00D24;
+  --aka-light:   #E8102E;
 
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  /* Legacy aliases */
+  --obsidian:    var(--washi);
+  --charcoal:    var(--washi-2);
+  --ash:         var(--washi-3);
+  --ivory:       var(--ink);
+  --ivory-dim:   var(--ink-mid);
+  --ivory-ghost: var(--ink-light);
+  --gold:        var(--aka);
+  --gold-light:  var(--aka-dark);
+
+  --font-serif: 'Shippori Mincho B1', Georgia, serif;
   --font-sans:  'Inter', system-ui, sans-serif;
 
   --max-w: 1120px;
@@ -34,23 +44,22 @@ html {
 }
 
 body {
-  background: var(--obsidian);
-  color: var(--ivory);
+  background: var(--washi);
+  color: var(--ink);
   font-family: var(--font-sans);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.7;
 }
 
 img { display: block; max-width: 100%; }
 a  { color: inherit; text-decoration: none; }
 
-/* ── Typography ─────────────────────────────── */
-
 h1, h2, h3, h4 {
   font-family: var(--font-serif);
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
 }
 
 .eyebrow {
@@ -59,10 +68,8 @@ h1, h2, h3, h4 {
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--aka);
 }
-
-/* ── Layout ─────────────────────────────────── */
 
 .container {
   width: 100%;
@@ -71,25 +78,21 @@ h1, h2, h3, h4 {
   padding: 0 clamp(1.25rem, 5vw, 3rem);
 }
 
-/* ── Ornament divider ───────────────────────── */
-
 .ornament {
   display: flex;
   align-items: center;
   gap: 1rem;
-  color: var(--gold);
-  opacity: 0.4;
+  color: var(--aka);
+  opacity: 0.35;
 }
 .ornament::before,
 .ornament::after {
   content: '';
   flex: 1;
   height: 1px;
-  background: var(--gold);
-  opacity: 0.3;
+  background: var(--ink);
+  opacity: 0.15;
 }
-
-/* ── Buttons ────────────────────────────────── */
 
 .btn {
   display: inline-flex;
@@ -107,21 +110,32 @@ h1, h2, h3, h4 {
 }
 
 .btn-primary {
-  background: var(--gold);
-  color: var(--obsidian);
-  border-color: var(--gold);
+  background: var(--aka);
+  color: #fff;
+  border-color: var(--aka);
 }
 .btn-primary:hover {
-  background: var(--gold-light);
-  border-color: var(--gold-light);
+  background: var(--aka-dark);
+  border-color: var(--aka-dark);
 }
 
 .btn-outline {
   background: transparent;
-  color: var(--ivory);
-  border-color: rgba(240,232,212,.3);
+  color: var(--ink);
+  border-color: rgba(0,0,0,.25);
 }
 .btn-outline:hover {
-  background: rgba(240,232,212,.06);
-  border-color: var(--ivory);
+  background: rgba(0,0,0,.04);
+  border-color: var(--ink);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-mid);
+  border-color: rgba(0,0,0,.2);
+}
+.btn-ghost:hover {
+  background: rgba(0,0,0,.04);
+  border-color: rgba(0,0,0,.4);
+  color: var(--ink);
 }

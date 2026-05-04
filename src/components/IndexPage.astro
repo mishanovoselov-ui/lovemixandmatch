@@ -124,6 +124,7 @@ const labels = langLabels[locale];
 <section class="mechanic" id="mechanic">
   <div class="container">
     <p class="eyebrow" data-reveal>{c.mechanic.eyebrow}</p>
+    <h2 class="mechanic__title" data-reveal>{c.mechanic.title}</h2>
     <div class="mechanic__list">
       {c.mechanic.items.map((item, i) => (
         <article class="mechanic__item" data-reveal-stagger>
@@ -370,17 +371,17 @@ gsap.from('.video__wrap', {
 .hero__edition { font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:#bbb; margin:0; }
 .hero__cta { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; margin-top:1rem; }
 .hero__scroll { display:flex; justify-content:center; padding:2rem; }
-.hero__scroll-line { width:1px; height:48px; background:linear-gradient(to bottom,#c49a3c,transparent); animation:scrollPulse 2.5s ease-in-out infinite; }
+.hero__scroll-line { width:1px; height:48px; background:linear-gradient(to bottom,var(--aka),transparent); animation:scrollPulse 2.5s ease-in-out infinite; }
 @keyframes scrollPulse { 0%,100%{opacity:.2;transform:scaleY(1)} 50%{opacity:.7;transform:scaleY(1.1)} }
 
 /* ── Pullquote ───────────────── */
 .pullquote { padding:var(--section-py) 0; background:var(--washi-2); }
-.pullquote__text { font-family:var(--font-serif); font-style:italic; font-size:clamp(1.1rem,2.2vw,1.6rem); font-weight:400; line-height:1.65; text-align:center; color:var(--ink); max-width:720px; margin:1.5rem auto; padding:0 1rem; opacity:.85; }
+.pullquote__text { font-family:var(--font-serif); font-style:italic; font-size:clamp(1.5rem,3.2vw,2.4rem); font-weight:500; line-height:1.4; text-align:center; color:var(--ink); max-width:800px; margin:1.5rem auto; padding:0 1rem; }
 
 /* ── About ───────────────────── */
 .about { padding:var(--section-py) 0; background:var(--washi); }
 .about__inner { display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,6vw,6rem); align-items:start; }
-.about__title { font-size:clamp(1.8rem,4vw,3rem); margin:.75rem 0 1.5rem; color:var(--ink); }
+.about__title { font-size:clamp(2.8rem,7vw,6.5rem); margin:.75rem 0 2rem; color:var(--ink); font-weight:700; line-height:.95; }
 .about__body { color:var(--ink-mid); margin-bottom:1rem; font-size:1rem; }
 .about__body em { color:var(--aka); font-style:normal; }
 .about__facts { display:flex; gap:3rem; margin-top:3rem; padding-top:2.5rem; border-top:1px solid rgba(0,0,0,.1); }
@@ -395,6 +396,14 @@ gsap.from('.video__wrap', {
 
 /* ── Mechanic — editorial list ── */
 .mechanic { padding:var(--section-py) 0; background:var(--washi-2); }
+
+.mechanic__title {
+  font-size:clamp(2.8rem,7vw,6.5rem);
+  font-weight:700;
+  line-height:.95;
+  margin:.75rem 0 0;
+  color:var(--ink);
+}
 
 .mechanic__list { margin-top:3.5rem; border-top:1px solid rgba(0,0,0,.1); }
 
@@ -463,14 +472,14 @@ gsap.from('.video__wrap', {
 
 /* ── Video ───────────────────── */
 .video-section { padding:var(--section-py) 0; background:var(--washi); }
-.video__title { font-size:clamp(1.6rem,3.5vw,2.5rem); text-align:center; margin:.75rem 0 3rem; color:var(--ink); }
+.video__title { font-size:clamp(2.5rem,6vw,5.5rem); text-align:center; margin:.75rem 0 3rem; color:var(--ink); font-weight:700; line-height:1; }
 .video__wrap { position:relative; width:100%; max-width:900px; margin:0 auto; aspect-ratio:16/9; background:var(--washi-3); border:1px solid rgba(0,0,0,.08); overflow:hidden; }
 .video__wrap iframe { position:absolute; inset:0; width:100%; height:100%; border:none; }
 .video__placeholder { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; color:var(--ink-light); font-size:.8rem; letter-spacing:.1em; }
 
 /* ── Kasane / Book Flip ──────── */
 .kasane { padding:var(--section-py) 0; background:var(--washi-2); }
-.kasane__title { font-size:clamp(1.6rem,3.5vw,2.5rem); text-align:center; margin:.75rem 0 .75rem; color:var(--ink); }
+.kasane__title { font-size:clamp(2.5rem,6vw,5.5rem); text-align:center; margin:.75rem 0 .75rem; color:var(--ink); font-weight:700; line-height:1; }
 .kasane__sub { text-align:center; color:var(--ink-mid); font-size:.85rem; margin-bottom:3rem; letter-spacing:.04em; }
 
 /* ── Artist ──────────────────── */
@@ -479,14 +488,14 @@ gsap.from('.video__wrap', {
 .artist__portrait { position:relative; aspect-ratio:3/4; }
 .artist__portrait-placeholder { width:100%; height:100%; background:var(--washi-2); border:1px solid rgba(0,0,0,.08); display:flex; align-items:center; justify-content:center; font-size:.85rem; color:var(--ink-light); text-align:center; line-height:2; }
 .artist__portrait-frame { position:absolute; inset:10px; border:1px solid rgba(200,16,46,.2); pointer-events:none; }
-.artist__name { font-size:clamp(2.4rem,6vw,5rem); margin:.75rem 0 1.5rem; color:var(--ink); line-height:.95; letter-spacing:-.02em; }
+.artist__name { font-size:clamp(3rem,8vw,7rem); margin:.75rem 0 1.5rem; color:var(--ink); line-height:.9; letter-spacing:-.03em; font-weight:700; }
 .artist__bio { color:var(--ink-mid); margin-bottom:1rem; }
 .artist__link { margin-top:2rem; }
 
 /* ── Buy — editorial list ─────── */
 .buy { padding:var(--section-py) 0; background:var(--washi-2); }
 .buy .eyebrow { color:var(--aka); }
-.buy__title { font-size:clamp(1.8rem,4vw,2.75rem); text-align:center; margin:.75rem 0 1rem; color:var(--ink); }
+.buy__title { font-size:clamp(2.8rem,7vw,6.5rem); text-align:center; margin:.75rem 0 1rem; color:var(--ink); font-weight:700; line-height:.95; }
 .buy__subtitle { text-align:center; color:var(--ink-mid); font-size:.9rem; max-width:500px; margin:0 auto 3rem; }
 
 .buy__list { border-top:1px solid rgba(0,0,0,.1); }
