@@ -58,7 +58,7 @@ const cells: GalleryItem[] =
     >
       <div class="gallery__imgs">
 
-        {/* Primary image or placeholder */}
+        <!-- Primary image or placeholder -->
         {item.src ? (
           <img
             class="gallery__img gallery__img--primary"
@@ -73,7 +73,7 @@ const cells: GalleryItem[] =
           </div>
         )}
 
-        {/* Pair / mitate reveal */}
+        <!-- Pair / mitate reveal -->
         {item.pair?.src && (
           <img
             class="gallery__img gallery__img--pair"
@@ -85,7 +85,7 @@ const cells: GalleryItem[] =
           />
         )}
 
-        {/* Kanji mark — appears on hover */}
+        <!-- Kanji mark — appears on hover -->
         <span class="gallery__mark" aria-hidden="true">見立て</span>
 
       </div>
