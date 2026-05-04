@@ -34,21 +34,20 @@ const hasItems = items.length > 0;
   <div class="marquee-section">
     {eyebrow && <p class="marquee-eyebrow" aria-hidden="true">{eyebrow}</p>}
     <div class="marquee" role="marquee" aria-label="Recent collector purchases">
+      <!-- Duplicated for seamless infinite loop -->
       <div class="marquee__track" aria-hidden="true">
-        {/* Render twice for seamless loop */}
-        {[0, 1].map(() =>
-          items.map((item, i) => (
-            <span class="marquee__item">
-              <span class="marquee__flag">{item.flag}</span>
-              {item.name
-                ? <><strong class="marquee__name">{item.name}</strong><span class="marquee__sep">·</span><span class="marquee__loc">{item.location}</span></>
-                : <span class="marquee__loc">{item.location}</span>
-              }
-              <span class="marquee__action">{label}</span>
-              <span class="marquee__dot" aria-hidden="true">✦</span>
-            </span>
-          ))
-        )}
+        {[...items, ...items].map((item) => (
+          <span class="marquee__item">
+            <span class="marquee__flag">{item.flag}</span>
+            {item.name && (
+              <strong class="marquee__name">{item.name}</strong>
+              <span class="marquee__sep">·</span>
+            )}
+            <span class="marquee__loc">{item.location}</span>
+            <span class="marquee__action">{label}</span>
+            <span class="marquee__dot" aria-hidden="true">✦</span>
+          </span>
+        ))}
       </div>
     </div>
   </div>
