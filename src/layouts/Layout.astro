@@ -1,0 +1,111 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  lang?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  lang = 'en',
+  ogImage = '/og-image.jpg'
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const siteURL = 'https://lovemixandmatch.com';
+
+const schemaBook = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Book",
+      "name": "Love",
+      "alternateName": "Love — Mix & Match Shunga Ehon",
+      "description": "Limited edition shunga-inspired collectible ehon with kasane mechanic. 1,600 unique cross-seam image combinations from two watoji-bound volumes.",
+      "author": [
+        {
+          "@type": "Person",
+          "name": "Sveta Dorosheva",
+          "url": "https://svetadorosheva.com",
+          "sameAs": ["https://www.instagram.com/sveta.dorosheva/"]
+        },
+        {
+          "@type": "Person",
+          "name": "Mikhail Novoselov",
+          "jobTitle": "Creative Director"
+        }
+      ],
+      "bookFormat": "https://schema.org/Hardcover",
+      "genre": ["Artist's book", "Shunga", "Collectible art", "Limited edition", "Japanese bookbinding"],
+      "inLanguage": "en",
+      "url": siteURL,
+      "image": `${siteURL}/og-image.jpg`
+    },
+    {
+      "@type": "Person",
+      "@id": "https://svetadorosheva.com/#person",
+      "name": "Sveta Dorosheva",
+      "url": "https://svetadorosheva.com",
+      "jobTitle": "Illustrator",
+      "nationality": [
+        { "@type": "Country", "name": "Ukraine" },
+        { "@type": "Country", "name": "Israel" }
+      ],
+      "sameAs": [
+        "https://svetadorosheva.com",
+        "https://www.instagram.com/sveta.dorosheva/"
+      ]
+    }
+  ]
+};
+---
+<!doctype html>
+<html lang={lang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="book" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:image" content={`${siteURL}${ogImage}`} />
+  <meta property="og:site_name" content="Love — Mix & Match Ehon" />
+  <meta property="og:locale" content={lang === 'ru' ? 'ru_RU' : 'en_US'} />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={`${siteURL}${ogImage}`} />
+
+  <!-- Hreflang alternates -->
+  <link rel="alternate" hreflang="en" href={siteURL + '/'} />
+  <link rel="alternate" hreflang="ru" href={siteURL + '/ru/'} />
+  <link rel="alternate" hreflang="x-default" href={siteURL + '/'} />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify(schemaBook)} />
+
+  <!-- Favicon + sitemap -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+  <!-- Fonts + Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles/global.css" />
+</head>
+<body>
+  <slot />
+</body>
+</html>

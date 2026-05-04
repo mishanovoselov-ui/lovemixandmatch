@@ -1,0 +1,62 @@
+---
+/**
+ * LottieAnim — reusable Lottie animation component
+ *
+ * Usage:
+ *   <LottieAnim src="/animations/lottie/kasane.lottie" width={400} height={400} />
+ *   <LottieAnim src="/animations/lottie/kasane.json"   width={400} height={400} loop={false} />
+ *
+ * Supports: .lottie (dotLottie) and .json (Lottie JSON)
+ * GIFs: just use a regular <img> tag — no component needed
+ */
+
+export interface Props {
+  src: string;          // path to .lottie or .json file in /public/animations/
+  width?: number;
+  height?: number;
+  loop?: boolean;
+  autoplay?: boolean;
+  class?: string;
+  id?: string;          // optional, auto-generated if omitted
+}
+
+const {
+  src,
+  width,
+  height,
+  loop = true,
+  autoplay = true,
+  class: className = '',
+  id = `lottie-${Math.random().toString(36).slice(2, 8)}`,
+} = Astro.props;
+---
+
+<canvas
+  id={id}
+  class:list={['lottie-canvas', className]}
+  width={width}
+  height={height}
+  data-src={src}
+  data-loop={loop ? 'true' : 'false'}
+  data-autoplay={autoplay ? 'true' : 'false'}
+  aria-hidden="true"
+></canvas>
+
+<script>
+import { DotLottie } from '@lottiefiles/dotlottie-web';
+
+document.querySelectorAll<HTMLCanvasElement>('canvas.lottie-canvas').forEach(canvas => {
+  const src      = canvas.dataset.src ?? '';
+  const loop     = canvas.dataset.loop !== 'false';
+  const autoplay = canvas.dataset.autoplay !== 'false';
+
+  new DotLottie({ canvas, src, loop, autoplay });
+});
+</script>
+
+<style>
+.lottie-canvas {
+  display: block;
+  max-width: 100%;
+}
+</style>
