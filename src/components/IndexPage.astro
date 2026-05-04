@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import BookFlip from './BookFlip.astro';
 import Gallery from './Gallery.astro';
+import SalesMarquee from './SalesMarquee.astro';
 import type { Locale, SiteContent } from '../i18n/content.ts';
 
 export interface Props {
@@ -28,9 +29,8 @@ const labels = langLabels[locale];
 <!-- ══ NAV ══════════════════════════════════ -->
 <nav class="nav">
   <div class="container nav__inner">
-    <a href={langPaths[locale]} class="nav__logo" aria-label={c.footer.title}>
-      <!-- TODO: replace /logo.svg with final book logo from designer -->
-      <img src="/logo.svg" alt="Love" width="80" height="28" class="nav__logo-img" />
+    <a href={langPaths[locale]} class="nav__logo" aria-label="Sveta Dorosheva">
+      <img src="/sd-icon.svg" alt="Sveta Dorosheva" width="36" height="36" class="nav__logo-img" />
     </a>
     <div class="nav__langs">
       <a href="/"    class:list={['nav__lang', { 'nav__lang--active': locale === 'en' }]} aria-current={locale === 'en' ? 'page' : undefined}>{labels.en}</a>
@@ -249,6 +249,9 @@ const labels = langLabels[locale];
     </div>
   </div>
 </section>
+
+<!-- ══ SALES MARQUEE ══════════════════════════ -->
+<SalesMarquee items={c.sales.items} label={c.sales.label} eyebrow={c.sales.eyebrow} />
 
 <!-- ══ BUY ═════════════════════════════════════ -->
 <section class="buy" id="buy">
@@ -503,7 +506,7 @@ gsap.from('.video__wrap', {
 .mechanic__item:hover .mechanic__kanji { color:rgba(200,16,46,.13); }
 
 /* ── Nav logo ────────────────── */
-.nav__logo-img { display:block; height:28px; width:auto; opacity:.9; transition:opacity .2s; }
+.nav__logo-img { display:block; height:36px; width:36px; opacity:.9; transition:opacity .2s; }
 .nav__logo:hover .nav__logo-img { opacity:.5; }
 
 /* ── Mitate Gallery ──────────── */

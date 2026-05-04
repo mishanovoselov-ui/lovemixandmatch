@@ -1,0 +1,169 @@
+---
+/**
+ * SalesMarquee — infinite horizontal ticker of collector purchases
+ *
+ * Renders two identical tracks side by side so the loop is seamless.
+ * Pure CSS animation — no JavaScript required.
+ *
+ * Data: pass `items` from content.ts → sales.items
+ * Each item: { flag, location, name? }
+ *
+ * Usage:
+ *   <SalesMarquee items={c.sales.items} label={c.sales.label} />
+ */
+
+export interface SaleItem {
+  flag: string;       // emoji flag, e.g. "🇩🇪"
+  location: string;   // city or country, e.g. "Berlin"
+  name?: string;      // optional collector name, e.g. "M. R."
+}
+
+export interface Props {
+  items: SaleItem[];
+  label: string;      // e.g. "purchased Love"
+  eyebrow?: string;
+}
+
+const { items, label, eyebrow } = Astro.props;
+
+// Need at least 1 item to render
+const hasItems = items.length > 0;
+---
+
+{hasItems && (
+  <div class="marquee-section">
+    {eyebrow && <p class="marquee-eyebrow" aria-hidden="true">{eyebrow}</p>}
+    <div class="marquee" role="marquee" aria-label="Recent collector purchases">
+      <div class="marquee__track" aria-hidden="true">
+        {/* Render twice for seamless loop */}
+        {[0, 1].map(() =>
+          items.map((item, i) => (
+            <span class="marquee__item">
+              <span class="marquee__flag">{item.flag}</span>
+              {item.name
+                ? <><strong class="marquee__name">{item.name}</strong><span class="marquee__sep">·</span><span class="marquee__loc">{item.location}</span></>
+                : <span class="marquee__loc">{item.location}</span>
+              }
+              <span class="marquee__action">{label}</span>
+              <span class="marquee__dot" aria-hidden="true">✦</span>
+            </span>
+          ))
+        )}
+      </div>
+    </div>
+  </div>
+)}
+
+<style>
+/* ── Section wrapper ─────────────────────────────── */
+.marquee-section {
+  overflow: hidden;
+  border-top: 1px solid rgba(0, 0, 0, .07);
+  border-bottom: 1px solid rgba(0, 0, 0, .07);
+  background: var(--washi-2, #F5F2ED);
+  padding: 0;
+}
+
+.marquee-eyebrow {
+  text-align: center;
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-size: .6rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, .35);
+  padding: .9rem 0 0;
+  margin: 0;
+}
+
+/* ── Marquee track ───────────────────────────────── */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 28s linear infinite;
+}
+
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+
+/* ── Individual item ─────────────────────────────── */
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: .45em;
+  padding: .85rem 1.4rem;
+  white-space: nowrap;
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-size: .75rem;
+  font-weight: 400;
+  letter-spacing: .01em;
+  color: var(--ink, #0D0D0D);
+}
+
+.marquee__flag {
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.marquee__name {
+  font-weight: 500;
+}
+
+.marquee__loc {
+  color: rgba(0, 0, 0, .55);
+}
+
+.marquee__sep {
+  color: rgba(0, 0, 0, .2);
+}
+
+.marquee__action {
+  font-style: italic;
+  color: rgba(0, 0, 0, .45);
+  margin-left: .1em;
+}
+
+.marquee__dot {
+  color: var(--aka, #C8102E);
+  font-size: .55em;
+  opacity: .6;
+  margin-left: .4em;
+}
+
+/* ── Animation ───────────────────────────────────── */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Respect reduced motion ──────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .marquee {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+</style>

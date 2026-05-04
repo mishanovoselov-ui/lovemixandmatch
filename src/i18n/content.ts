@@ -1,5 +1,11 @@
 export type Locale = 'en' | 'ru';
 
+export interface SaleItem {
+  flag: string;      // emoji flag e.g. "🇩🇪"
+  location: string;  // city or country e.g. "Berlin"
+  name?: string;     // optional first initial + last name e.g. "M. R."
+}
+
 export interface MechanicItem {
   term: string;
   label: string;
@@ -108,6 +114,11 @@ export interface SiteContent {
     subtitle: string;
     links: BuyLink[];
   };
+  sales: {
+    eyebrow: string;
+    label: string;    // verb phrase appended to each item e.g. "purchased Love"
+    items: SaleItem[];
+  };
   footer: {
     title: string;
     copyright: string;
@@ -151,27 +162,22 @@ const en: SiteContent = {
   },
   mechanic: {
     eyebrow: 'The Mechanic',
-    title: 'Four Japanese craft traditions — one object',
+    title: 'Three Japanese craft traditions — one object',
     items: [
       {
         term: '重ね',
         label: 'Kasane',
-        body: 'The core mechanic. Two volumes placed side by side generate 1,600 unique cross-seam image combinations from 40 × 40 page pairings.',
+        body: 'The core mechanic. Each volume holds 40 pages of unique graphic patterns. Place the two volumes side by side and the right-hand page of the left book meets the left-hand page of the right book at the seam — generating 1,600 unique cross-seam image combinations from 40 × 40 page pairings.',
       },
       {
         term: '見立て',
         label: 'Mitate',
-        body: 'Poetic substitution. Each image works alone as a complete composition and again, differently, in every paired combination.',
-      },
-      {
-        term: '掛物',
-        label: 'Kakemono',
-        body: 'A kakemono is a traditional Japanese hanging scroll — artwork mounted on a rod, suspended from the wall, changed with the season. Love inherits this logic: the wooden crossbar hardware clips across both open volumes, suspending them side by side as a wall display. Any page, any combination. A different image every day — the book becomes a living exhibition.',
+        body: 'A foundational Japanese aesthetic concept: one thing seen as another. Mitate bridges high culture — classical literature, myth, legend — with the contemporary and the erotic, the elevated with the intimate. In shunga tradition this is the intellectual game that gives the image its second life: the viewer recognises the allusion and holds both readings at once. Every page in Love works as a complete composition on its own — and again, differently, as one half of its 1,600 possible pairs.',
       },
       {
         term: '覗き',
         label: 'Nozoki',
-        body: 'The shōji case is not packaging — it is a threshold. Sliding it open is a deliberate, intimate act: a pause before looking, a frame around the moment of discovery. The term nozoki (覗き, peeking) transforms what could be a simple unboxing into a choreographed ritual, separating the ordinary from what lies inside.',
+        body: 'The stolen glance through a shōji screen — the forbidden view through a gap in the wall — nozoki (覗き, peeping) is a motif in Japanese erotic art since the Edo period. The case of Love is built on this tradition. The sliding shōji panel is not packaging: it is a threshold. Opening it is a deliberate, intimate act — a pause before looking, a frame around the moment of discovery. What lies inside is revealed only to those who choose to look.',
       },
     ],
   },
@@ -258,6 +264,26 @@ const en: SiteContent = {
       },
     ],
   },
+  sales: {
+    eyebrow: 'Collectors',
+    label: 'purchased Love',
+    items: [
+      // ── Paste actual purchases from so-called.me/love here ──
+      // Format: { flag: '🇩🇪', location: 'Berlin', name: 'M. R.' }
+      { flag: '🇩🇪', location: 'Berlin' },
+      { flag: '🇺🇸', location: 'New York' },
+      { flag: '🇮🇱', location: 'Tel Aviv' },
+      { flag: '🇫🇷', location: 'Paris' },
+      { flag: '🇬🇧', location: 'London' },
+      { flag: '🇯🇵', location: 'Tokyo' },
+      { flag: '🇳🇱', location: 'Amsterdam' },
+      { flag: '🇨🇦', location: 'Toronto' },
+      { flag: '🇦🇺', location: 'Melbourne' },
+      { flag: '🇨🇭', location: 'Zurich' },
+      { flag: '🇸🇪', location: 'Stockholm' },
+      { flag: '🇪🇸', location: 'Barcelona' },
+    ],
+  },
   footer: {
     title: 'Love — Mix & Match Ehon',
     copyright: 'Illustrations © Sveta Dorosheva. Creative Direction: Mikhail Novoselov. All rights reserved.',
@@ -301,27 +327,22 @@ const ru: SiteContent = {
   },
   mechanic: {
     eyebrow: 'Механика',
-    title: 'Четыре японские традиции — один объект',
+    title: 'Три японские традиции — один объект',
     items: [
       {
         term: '重ね',
         label: 'Касанэ',
-        body: 'Основная механика. Два тома рядом дают 1 600 уникальных сквозных изображений из 40 × 40 сочетаний страниц.',
+        body: 'Основная механика. Каждый том содержит 40 страниц с уникальными графическими узорами. Положите два тома рядом — правая страница левого тома встречается с левой страницей правого тома на сгибе, порождая 1 600 уникальных сквозных комбинаций из 40 × 40 сочетаний страниц.',
       },
       {
         term: '見立て',
         label: 'Митатэ',
-        body: 'Поэтическая замена. Каждое изображение работает как самостоятельная композиция — и по-новому в каждом сочетании.',
-      },
-      {
-        term: '掛物',
-        label: 'Какэмоно',
-        body: 'Какэмоно — традиционный японский подвесной свиток: произведение искусства на перекладине, вывешиваемое на стену и меняемое со сменой сезона. Love наследует эту логику: деревянная перекладина крепится через оба раскрытых тома и удерживает их рядом как настенный объект. Любая страница, любая комбинация. Новое изображение каждый день — книга становится живой выставкой.',
+        body: 'Основополагающее японское эстетическое понятие: одно явление, увиденное сквозь другое. Митатэ соединяет высокую культуру — классическую литературу, миф, легенду — с современным и чувственным, возвышенное с интимным. В традиции сюнга именно эта интеллектуальная игра даёт образу вторую жизнь: зритель узнаёт аллюзию и удерживает оба прочтения одновременно. Каждая страница Love работает как самостоятельная завершённая композиция — и снова, иначе, как одна половина из 1 600 возможных пар.',
       },
       {
         term: '覗き',
         label: 'Нодзоки',
-        body: 'Футляр сёдзи — не упаковка, а порог. Сдвинуть его — намеренный, интимный жест: пауза перед взглядом, рамка вокруг момента открытия. Слово нодзоки (覗き, подглядывание) превращает то, что могло быть простым распаковыванием, в хореографический ритуал — черту между обыденным и тем, что скрыто внутри.',
+        body: 'Украденный взгляд сквозь сётзи, запретный вид через щель в стене — нодзоки (覗き, подглядывание) был мотивом японского эротического искусства со времён эпохи Эдо. Футляр Love выстроен на этой традиции. Скользящая панель сёдзи — не упаковка: это порог. Сдвинуть её — намеренный, интимный жест: пауза перед взглядом, рамка вокруг момента открытия. Скрытое раскрывается лишь тому, кто решается посмотреть.',
       },
     ],
   },
@@ -404,6 +425,24 @@ const ru: SiteContent = {
         url: 'https://www.svetadorosheva.com',
         note: 'Принты, оригиналы и другие книги',
       },
+    ],
+  },
+  sales: {
+    eyebrow: 'Коллекционеры',
+    label: 'приобрели Love',
+    items: [
+      { flag: '🇩🇪', location: 'Берлин' },
+      { flag: '🇺🇸', location: 'Нью-Йорк' },
+      { flag: '🇮🇱', location: 'Тель-Авив' },
+      { flag: '🇫🇷', location: 'Париж' },
+      { flag: '🇬🇧', location: 'Лондон' },
+      { flag: '🇯🇵', location: 'Токио' },
+      { flag: '🇳🇱', location: 'Амстердам' },
+      { flag: '🇨🇦', location: 'Торонто' },
+      { flag: '🇦🇺', location: 'Мельбурн' },
+      { flag: '🇨🇭', location: 'Цюрих' },
+      { flag: '🇸🇪', location: 'Стокгольм' },
+      { flag: '🇪🇸', location: 'Барселона' },
     ],
   },
   footer: {
