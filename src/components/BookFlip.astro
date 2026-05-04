@@ -272,8 +272,8 @@ const RIGHT_COUNT = rightImages.length || 3;
   width: 100%;
   aspect-ratio: 19 / 27;   /* portrait — matches each volume's real proportions */
   overflow: hidden;
-  background: var(--ash);
-  border: 1px solid rgba(196,154,60,.1);
+  background: #E8E4DC;
+  border: 1px solid rgba(0,0,0,.08);
   cursor: pointer;
 }
 
@@ -320,19 +320,19 @@ const RIGHT_COUNT = rightImages.length || 3;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: var(--ash);
+  background: #E8E4DC;
 }
 .bf__placeholder-num {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 3rem;
-  color: rgba(196,154,60,.15);
+  color: rgba(200,16,46,.12);
   line-height: 1;
 }
 .bf__placeholder-hint {
   font-size: 0.65rem;
   letter-spacing: 0.1em;
-  color: var(--ivory-ghost);
+  color: #999;
   opacity: 0.6;
 }
 
@@ -350,9 +350,9 @@ const RIGHT_COUNT = rightImages.length || 3;
   background: linear-gradient(
     to bottom,
     transparent,
-    rgba(196,154,60,.3) 20%,
-    rgba(196,154,60,.5) 50%,
-    rgba(196,154,60,.3) 80%,
+    rgba(200,16,46,.25) 20%,
+    rgba(200,16,46,.45) 50%,
+    rgba(200,16,46,.25) 80%,
     transparent
   );
 }
@@ -367,9 +367,9 @@ const RIGHT_COUNT = rightImages.length || 3;
 .bf__btn {
   width: 36px;
   height: 36px;
-  border: 1px solid rgba(196,154,60,.25);
+  border: 1px solid rgba(0,0,0,.2);
   background: transparent;
-  color: var(--gold-light);
+  color: #555;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -379,12 +379,12 @@ const RIGHT_COUNT = rightImages.length || 3;
   flex-shrink: 0;
 }
 .bf__btn:hover {
-  background: rgba(196,154,60,.1);
-  border-color: var(--gold);
-  color: var(--gold);
+  background: rgba(200,16,46,.06);
+  border-color: #C8102E;
+  color: #C8102E;
 }
 .bf__btn:active {
-  background: rgba(196,154,60,.18);
+  background: rgba(200,16,46,.12);
 }
 
 .bf__counter {
@@ -392,7 +392,7 @@ const RIGHT_COUNT = rightImages.length || 3;
   align-items: center;
   gap: 0.3rem;
   font-size: 0.75rem;
-  color: var(--ivory-ghost);
+  color: #999;
   letter-spacing: 0.08em;
   min-width: 52px;
   justify-content: center;
