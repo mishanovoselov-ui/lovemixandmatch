@@ -30,7 +30,9 @@ const labels = langLabels[locale];
 <nav class="nav">
   <div class="container nav__inner">
     <a href={langPaths[locale]} class="nav__logo" aria-label="Sveta Dorosheva">
-      <img src="/sd-icon.svg" alt="Sveta Dorosheva" width="36" height="36" class="nav__logo-img" />
+      <svg class="nav__logo-img" viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <path d="M66.14.12c-3.76,7.62-7.18,14.53-10.73,21.71,11.35.73,20.35,5.22,26.72,14.36,14.05,20.16,1.46,49.03-22.82,51.25-12.16,1.11-24.5.19-37.39.19,3.62-7.34,7.07-14.35,10.63-21.6-12.09-.85-21.51-5.82-27.78-16.06C-8.06,29.02,6.44.99,30.63.19c11.59-.38,23.2-.07,35.51-.07ZM54.63,22.1c-8.25,0-15.86-.27-23.43.1-4.7.23-8.55,4.68-9.04,9.3-.57,5.38,2.12,9.92,7.1,11.68,4.35,1.54,8.88.5,13.33.73.9.05,1.42-.58,1.8-1.33,3.34-6.66,6.67-13.33,10.25-20.48ZM33.33,65.83c8.11,0,15.35.15,22.58-.05,4.93-.14,9.14-4.19,9.88-8.91.79-5.08-1.65-9.92-6.23-11.88-4.67-2-9.62-.84-14.45-.94-.48-.01-1.17.65-1.44,1.17-3.38,6.65-6.7,13.33-10.34,20.62Z"/>
+      </svg>
     </a>
     <div class="nav__langs">
       <a href="/"    class:list={['nav__lang', { 'nav__lang--active': locale === 'en' }]} aria-current={locale === 'en' ? 'page' : undefined}>{labels.en}</a>
@@ -506,7 +508,7 @@ gsap.from('.video__wrap', {
 .mechanic__item:hover .mechanic__kanji { color:rgba(200,16,46,.13); }
 
 /* ── Nav logo ────────────────── */
-.nav__logo-img { display:block; height:36px; width:36px; opacity:.9; transition:opacity .2s; }
+.nav__logo-img { display:block; height:36px; width:36px; fill:var(--ink); opacity:.85; transition:opacity .2s; }
 .nav__logo:hover .nav__logo-img { opacity:.5; }
 
 /* ── Mitate Gallery ──────────── */
