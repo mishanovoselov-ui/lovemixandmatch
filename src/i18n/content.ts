@@ -59,7 +59,8 @@ export interface SiteContent {
   video: {
     eyebrow: string;
     title: string;
-    youtubeId: string; // YouTube video ID, e.g. 'dQw4w9WgXcQ'
+    youtubeId: string;  // YouTube video ID — used if driveId is empty
+    driveId?: string;   // Google Drive file ID — takes priority over youtubeId
   };
   gallery: {
     eyebrow: string;
@@ -177,7 +178,8 @@ const en: SiteContent = {
   video: {
     eyebrow: 'In Motion',
     title: 'See the mechanic',
-    youtubeId: 'YOUTUBE_ID_HERE', // TODO: replace with actual YouTube video ID
+    youtubeId: '',
+    driveId: '1AIqFSwsbbNdX5w11-nrpdxH7loyaM0eL',
   },
   gallery: {
     eyebrow: 'Mix & Match',
@@ -326,7 +328,8 @@ const ru: SiteContent = {
   video: {
     eyebrow: 'В движении',
     title: 'Смотрите как это работает',
-    youtubeId: 'YOUTUBE_ID_HERE', // TODO: заменить на реальный ID
+    youtubeId: '',
+    driveId: '1AIqFSwsbbNdX5w11-nrpdxH7loyaM0eL',
   },
   gallery: {
     eyebrow: 'Mix & Match',

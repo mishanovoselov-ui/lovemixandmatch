@@ -157,7 +157,16 @@ const labels = langLabels[locale];
     <p class="eyebrow" style="text-align:center" data-reveal>{c.video.eyebrow}</p>
     <h2 class="video__title" data-reveal>{c.video.title}</h2>
     <div class="video__wrap" data-reveal>
-      {c.video.youtubeId && c.video.youtubeId !== 'YOUTUBE_ID_HERE' ? (
+      {c.video.driveId ? (
+        <iframe
+          src={`https://drive.google.com/file/d/${c.video.driveId}/preview`}
+          title={c.video.title}
+          frameborder="0"
+          allow="autoplay"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      ) : c.video.youtubeId ? (
         <iframe
           src={`https://www.youtube-nocookie.com/embed/${c.video.youtubeId}?rel=0&modestbranding=1&color=white`}
           title={c.video.title}
@@ -167,13 +176,12 @@ const labels = langLabels[locale];
           loading="lazy"
         ></iframe>
       ) : (
-        <!-- Placeholder until YouTube ID is set in content.ts -->
         <div class="video__placeholder">
           <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
             <circle cx="24" cy="24" r="23" stroke="currentColor" stroke-width="1" opacity="0.3"/>
             <path d="M19 16L35 24L19 32V16Z" fill="currentColor" opacity="0.4"/>
           </svg>
-          <span>Video — add YouTube ID to content.ts</span>
+          <span>Video — add driveId or youtubeId to content.ts</span>
         </div>
       )}
     </div>
